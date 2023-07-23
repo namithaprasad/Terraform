@@ -1,0 +1,57 @@
+resource "azurerm_management_lock" "kv" {
+    depends_on                      = [azurerm_key_vault.kv]
+    name                            = "Key Vault Lock"
+    scope                           = azurerm_key_vault.kv.id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "rsv" {
+    depends_on                      = [azurerm_recovery_services_vault.rsv]
+    name                            = "Recovery Services Vault Lock"
+    scope                           = azurerm_recovery_services_vault.rsv.id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "sa" {
+    depends_on                      = [azurerm_storage_account.sa]
+    name                            = "Storage Account Lock"
+    scope                           = azurerm_storage_account.sa.id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "bst" {
+    depends_on                      = [azurerm_bastion_host.bst]
+    name                            = "Recovery Services Vault Lock"
+    scope                           = azurerm_bastion_host.bst.id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "rt" {
+    depends_on                      = [azurerm_route_table.rt]
+    count                           = length(var.vnet_config.vnet1.subnet_names)
+    name                            = "Route Table Lock"
+    scope                           = azurerm_route_table.rt[count.index].id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "snet" {
+    depends_on                      = [azurerm_subnet.snet]
+    count                           = length(var.vnet_config.vnet1.subnet_names)
+    name                            = "Subnet Lock"
+    scope                           = azurerm_subnet.snet[count.index].id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}
+
+resource "azurerm_management_lock" "vnet" {
+    depends_on                      = [azurerm_virtual_network.vnet]
+    name                            = "Virtual Network Lock"
+    scope                           = azurerm_virtual_network.vnet.id
+    lock_level                      = "CanNotDelete"
+    notes                           = "This is a locked Resource"      
+}

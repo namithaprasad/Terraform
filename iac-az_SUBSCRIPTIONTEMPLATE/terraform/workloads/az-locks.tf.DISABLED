@@ -1,0 +1,31 @@
+# resource "azurerm_management_lock" "bst" {
+#     depends_on                      = [azurerm_bastion_host.bst]
+#     name                            = "Recovery Services Vault Lock"
+#     scope                           = azurerm_bastion_host.bst.id
+#     lock_level                      = "ReadOnly"
+#     notes                           = "This is a locked Resource"      
+# }
+
+# resource "azurerm_management_lock" "rt" {
+#     depends_on                      = [azurerm_route_table.rt]
+#     name                            = "Route Table Lock"
+#     scope                           = azurerm_route_table.rt.id
+#     lock_level                      = "ReadOnly"
+#     notes                           = "This is a locked Resource"      
+# }
+
+# resource "azurerm_management_lock" "snet" {
+#     depends_on                      = [azurerm_subnet.subnet]
+#     name                            = "Subnet Lock"
+#     scope                           = azurerm_subnet.subnet.id
+#     lock_level                      = "ReadOnly"
+#     notes                           = "This is a locked Resource"      
+# }
+
+# resource "azurerm_management_lock" "vnet" {
+#     depends_on                      = [azurerm_virtual_network.vnet]
+#     name                            = "Virtual Network Lock"
+#     scope                           = azurerm_virtual_network.vnet.id
+#     lock_level                      = "ReadOnly"
+#     notes                           = "This is a locked Resource"      
+# }

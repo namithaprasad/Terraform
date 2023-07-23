@@ -1,0 +1,19 @@
+trigger:
+  - none
+
+pr: "none"
+
+stages:
+  - template: ../../_pipelines-shared/template-plan-apply.yml
+    parameters:
+      stagePrefix: "SUBNAMESHORT"
+      applyEnvironment: "SUBNAME"
+      servicesTfdir: "$(System.DefaultWorkingDirectory)/iac-az_Platform-Management/terraform/services"
+      workloadsTfdir: "$(System.DefaultWorkingDirectory)/iac-az_Platform-Management/terraform/workloads"
+      backendAzureRmResourceGroupName: "rg-prd-iac-tf-001"
+      backendAzureRmStorageAccountName: "stasahigpfmgttf"
+      servicesBackendAzureRmKey: "XXXEEE-services.tfstate"
+      workloadsBackendAzureRmKey: "XXXEEE-workloads.tfstate"
+      backendServiceArm: "spn-prd-iac-tfstate-001" # SPN WITH R/W ACCESS TO WHERE TF STATE IS TO BE STORED
+      environmentServiceNameAzureRM: "spn-EEE-iac-XXX-001" # SPN WITH R/W ACCESS TO TARGET LOCATION OF RESOURCES TO BE DEPLOYED
+      terraformVersion: "0.14.7"
